@@ -72,7 +72,7 @@ mise trust
 mise install
 ```
 
-This project targets Rust edition 2024. The toolchain is pinned to {{ cookiecutter.rust_toolchain }} in `rust-toolchain.toml`, which satisfies the {{ cookiecutter.rust_msrv }} minimum for the edition.
+This project targets Rust edition 2024. The toolchain is pinned to {{ cookiecutter.rust_toolchain }} in `rust-toolchain.toml`, comfortably above the edition's 1.85 minimum.
 
 ### Common Tasks
 
