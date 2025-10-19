@@ -9,7 +9,7 @@ Cookiecutter template for building opinionated Rust command-line applications wi
 - Clap-based CLI entrypoint with color-eyre error handling and assert_cmd integration tests.
 - Documentation-first workflow via `README.md`, `AGENTS.md`, `CHANGELOG.md`, and `docs/releasing.md`.
 - GitHub Actions CI that reuses mise tasks and keeps coverage publishing on Linux pushes.
-- Rust 2024 edition by default with MSRV pinned to Rust 1.85 for modern language features.
+- Rust 2024 edition by default with MSRV pinned to Rust 1.90 for modern language features.
 
 ## Usage
 
@@ -34,8 +34,8 @@ mise run coverage  # optional, requires llvm tools
 - `crate_name`: Derived Rust crate identifier (press Enter to accept the default).
 - `binary_name`: Derived binary name (press Enter to accept the default).
 - `description`: Short sentence for Cargo metadata.
-- `rust_toolchain`: Toolchain channel (defaults to `1.85.1`).
-- `rust_msrv`: Minimum supported Rust version (defaults to `1.85` for Rust 2024 edition).
+- `rust_toolchain`: Toolchain channel (defaults to `1.90.0`).
+- `rust_msrv`: Minimum supported Rust version (defaults to `1.90` for Rust 2024 edition).
 - `license_year`: Copyright year stamped into `LICENSE`.
 
 Cookiecutter will prompt for derived values (slug, crate, binary); press Enter to accept the defaults so naming stays consistent.

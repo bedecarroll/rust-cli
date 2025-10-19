@@ -6,7 +6,7 @@
   "description": "An opinionated Rust CLI application.",
   "github_handle": "bedecarroll",
   "author_name": "Bede Carroll",
-  "rust_toolchain": "1.85.1",
-  "rust_msrv": "1.85",
+  "rust_toolchain": "1.90.0",
+  "rust_msrv": "1.90",
   "license_year": "{% now 'utc', '%Y' %}"
 }

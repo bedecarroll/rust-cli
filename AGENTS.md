@@ -9,7 +9,7 @@ This repository contains the Cookiecutter template used to scaffold Rust CLI pro
 - Generate a project via `cookiecutter /path/to/rust-cli`. The only required answers are those documented in `README.md`; all other identifiers are derived automatically.
 - Accept the default slug/crate/binary prompts unless you have a strong reason to deviate—this keeps naming consistent.
 - After generating a project, follow the generated `README.md` instructions (`mise trust`, `mise install`, `mise run check`).
-- The template targets Rust edition 2024 with an MSRV of 1.85; keep downstream projects on a compatible toolchain unless explicitly discussed.
+- The template targets Rust edition 2024 with an MSRV of 1.90; keep downstream projects on a compatible toolchain unless explicitly discussed.
 - The template intentionally includes an example `greet` command and integration tests to ensure immediate test coverage. Downstream projects can remove or replace them.
 
 ## Editing Guidance
