@@ -1,0 +1,30 @@
+[package]
+name = "{{ cookiecutter.project_slug }}"
+version = "0.1.0"
+edition = "2024"
+rust-version = "{{ cookiecutter.rust_msrv }}"
+authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.github_handle }}@users.noreply.github.com>"]
+description = "{{ cookiecutter.description }}"
+homepage = "https://github.com/{{ cookiecutter.github_handle }}/{{ cookiecutter.project_slug }}"
+repository = "https://github.com/{{ cookiecutter.github_handle }}/{{ cookiecutter.project_slug }}"
+license = "MIT"
+readme = "README.md"
+keywords = ["cli"]
+categories = ["command-line-utilities"]
+default-run = "{{ cookiecutter.binary_name }}"
+
+[[bin]]
+name = "{{ cookiecutter.binary_name }}"
+path = "src/main.rs"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+module_name_repetitions = "allow"
+
+[dependencies]
+clap = { version = "4.5.4", features = ["derive"] }
+color-eyre = "0.6"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "3.1"
