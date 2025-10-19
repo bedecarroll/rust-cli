@@ -38,6 +38,10 @@ impl Config {
         }
 
         if root.is_file() {
+            tracing::warn!(
+                path = %root.display(),
+                "Config path points to a file; skipping configuration load"
+            );
             return Ok(config);
         }
 
