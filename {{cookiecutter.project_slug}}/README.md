@@ -113,6 +113,7 @@ Snapshot assertions live under `tests/snapshots/` and use the [`insta`](https://
 ### Releasing
 
 Follow `docs/releasing.md` for manual `cargo dist` setup and release automation guidance. The `dist-*` tasks wrap common `cargo dist` flows once you are ready to ship archives.
+Release artifacts default to `.tar.gz` on Unix and `.zip` on Windows so the optional `self-update` command can unpack them out of the box.
 
 ### Self-Update (Optional)
 

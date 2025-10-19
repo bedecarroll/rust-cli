@@ -75,6 +75,7 @@ Run tasks with `mise run <task>`:
 ## Releases
 
 - `cargo dist` configuration is user-managed. Run `cargo dist init` when you are ready to automate releases, then commit the generated files (see the `dist-*` tasks).
+- Cargo-dist archives default to `.tar.gz` on Unix and `.zip` on Windows so the optional `self-update` feature can unpack release assets without extra configuration.
 - Document each release in `CHANGELOG.md` following Keep a Changelog conventions.
 
 ## Optional Features

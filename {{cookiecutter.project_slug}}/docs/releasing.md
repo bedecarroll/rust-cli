@@ -11,6 +11,7 @@ This repository does not include a pre-generated `dist-workspace.toml`. The `car
    ```bash
    cargo dist init
    ```
+   The template pins default archive formats to `.tar.gz` (Unix) and `.zip` (Windows) so the optional `self-update` command can consume the published assets without extra tweaks.
 4. Review the generated `dist-workspace.toml` and commit it alongside any workflow updates that `cargo dist` suggests.
 5. For each release candidate:
    ```bash
