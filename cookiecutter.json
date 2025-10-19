@@ -8,5 +8,5 @@
   "author_name": "Bede Carroll",
   "rust_toolchain": "1.85.1",
   "rust_msrv": "1.85",
-  "license_year": "2025"
+  "license_year": "{% now 'utc', '%Y' %}"
 }

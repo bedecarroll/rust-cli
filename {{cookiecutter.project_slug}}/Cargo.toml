@@ -13,6 +13,10 @@ keywords = ["cli"]
 categories = ["command-line-utilities"]
 default-run = "{{ cookiecutter.binary_name }}"
 
+[features]
+default = []
+self-update = ["dep:self_update"]
+
 [[bin]]
 name = "{{ cookiecutter.binary_name }}"
 path = "src/main.rs"
@@ -23,8 +27,18 @@ module_name_repetitions = "allow"
 
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
+clap_complete = "4.5"
+clap_mangen = "0.2"
 color-eyre = "0.6"
+directories = "5.0"
+serde = { version = "1.0", features = ["derive"] }
+toml = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+self_update = { version = "0.39", optional = true, default-features = false, features = ["rustls"] }
 
 [dev-dependencies]
 assert_cmd = "2.0"
+assert_fs = "1.1"
 predicates = "3.1"
+insta = { version = "1.39", features = ["glob"] }
