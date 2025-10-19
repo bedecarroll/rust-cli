@@ -143,3 +143,53 @@ default_name = "Final"
     temp.close()?;
     Ok(())
 }
+
+#[test]
+fn config_dir_flag_overrides_default_location() -> color_eyre::Result<()> {
+    let temp = TempDir::new()?;
+    let custom_dir = temp.child("custom");
+    custom_dir.create_dir_all()?;
+    custom_dir
+        .child("config.toml")
+        .write_str(
+            r#"
+[greet]
+default_name = "Flag User"
+"#,
+        )?;
+
+    let mut cmd = Command::cargo_bin("{{ cookiecutter.binary_name }}")?;
+    cmd.args([
+        "--config-dir",
+        custom_dir.path().to_str().unwrap(),
+        "greet",
+    ])
+    .assert()
+    .success()
+    .stdout(predicate::str::contains("Flag User"));
+
+    temp.close()?;
+    Ok(())
+}
+
+#[test]
+fn fails_when_config_contains_invalid_toml() -> color_eyre::Result<()> {
+    let temp = TempDir::new()?;
+    let xdg_config = temp.child("config");
+    xdg_config.create_dir_all()?;
+    let project_dir = xdg_config.child("{{ cookiecutter.project_slug }}");
+    project_dir.create_dir_all()?;
+    project_dir
+        .child("config.toml")
+        .write_str("invalid = [")?;
+
+    let mut cmd = Command::cargo_bin("{{ cookiecutter.binary_name }}")?;
+    cmd.env("XDG_CONFIG_HOME", xdg_config.path())
+        .arg("greet")
+        .assert()
+        .failure()
+        .stderr(predicate::str::contains("failed to parse"));
+
+    temp.close()?;
+    Ok(())
+}
