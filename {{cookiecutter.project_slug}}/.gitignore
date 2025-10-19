@@ -6,3 +6,5 @@ debug/
 .env
 .env.*
 coverage/
+docs/completions/
+docs/man/

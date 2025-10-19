@@ -9,8 +9,10 @@ rust = "{{ cookiecutter.rust_toolchain }}"
 "cargo:cargo-nextest" = "latest"
 "cargo:cargo-llvm-cov" = "latest"
 "cargo:typos-cli" = "latest"
+"cargo:cargo-insta" = "latest"
 node = "lts"
 "npm:markdownlint-cli2" = "latest"
+"cargo:cargo-deny" = "latest"
 
 [tasks.fmt]
 description = "Format all source files"
@@ -19,11 +21,12 @@ run = [
 ]
 
 [tasks.lint]
-description = "Clippy (pedantic), typos, and markdown lint"
+description = "Clippy (pedantic), typos, markdown lint, and dependency audit"
 run = [
   "cargo clippy --all-targets --all-features -- -D warnings",
   "typos",
   "markdownlint-cli2 \"**/*.md\" \"#target\" \"#coverage\" \"#dist\"",
+  "cargo deny check",
 ]
 
 [tasks.lint-fix]
@@ -38,6 +41,7 @@ run = [
 description = "Run the nextest test suite"
 run = [
   "cargo nextest run --workspace --all-targets",
+  "cargo insta test",
 ]
 [tasks.check]
 description = "Aggregate format, lint, test, and doctest runs"
@@ -59,6 +63,58 @@ run = [
 description = "Install the CLI locally via cargo"
 run = [
   "cargo install --path . --force",
+]
+
+[tasks.generate-completions]
+description = "Generate shell completions into docs/completions"
+run = [
+  "cargo run --bin {{ cookiecutter.binary_name }} -- completions bash --dir docs/completions",
+  "cargo run --bin {{ cookiecutter.binary_name }} -- completions zsh --dir docs/completions",
+  "cargo run --bin {{ cookiecutter.binary_name }} -- completions fish --dir docs/completions",
+  "cargo run --bin {{ cookiecutter.binary_name }} -- completions powershell --dir docs/completions",
+  "cargo run --bin {{ cookiecutter.binary_name }} -- completions elvish --dir docs/completions",
+]
+
+[tasks.generate-manpage]
+description = "Render the CLI man page into docs/man"
+run = [
+  "cargo run --bin {{ cookiecutter.binary_name }} -- manpage --dir docs/man",
+]
+
+[tasks.doc]
+description = "Build API docs and open them in a browser"
+run = [
+  "cargo doc --no-deps --open",
+]
+
+[tasks.dist-init]
+description = "Initialise cargo-dist configuration"
+run = [
+  "cargo dist init",
+]
+
+[tasks.dist-plan]
+description = "Plan the next cargo-dist release"
+run = [
+  "cargo dist plan",
+]
+
+[tasks.dist-build]
+description = "Build release artefacts with cargo-dist"
+run = [
+  "cargo dist build",
+]
+
+[tasks.snapshot]
+description = "Run insta snapshot tests"
+run = [
+  "cargo insta test",
+]
+
+[tasks.snapshot-review]
+description = "Interactively review insta snapshot updates"
+run = [
+  "cargo insta review",
 ]
 
 [tasks.dist-doc]

@@ -2,7 +2,7 @@
 
 This repository does not include a pre-generated `dist-workspace.toml`. The `cargo dist` tool manages that file and its format may change between releases. Follow these steps when you are ready to automate binary distribution:
 
-1. Ensure a clean working tree and up-to-date `CHANGELOG.md` entry.
+1. Ensure a clean working tree and up-to-date `CHANGELOG.md` entry. Once the process below is familiar, `mise run dist-plan` and `mise run dist-build` provide convenient wrappers around the key commands.
 2. Install dist tooling:
    ```bash
    cargo install cargo-dist
