@@ -1,7 +1,7 @@
 min_version = "2025.9.10"
 
 [tools]
-rust = "{{ cookiecutter.rust_toolchain }}"
+rust = { version = "{{ cookiecutter.rust_toolchain }}", components = "rustfmt,clippy,llvm-tools-preview" }
 "cargo:cargo-binstall" = "latest"
 "cargo:cargo-nextest" = "latest"
 "cargo:cargo-llvm-cov" = "latest"
