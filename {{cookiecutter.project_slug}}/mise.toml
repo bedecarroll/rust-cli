@@ -1,0 +1,68 @@
+min_version = '2024.11.1'
+
+[settings]
+python.uv_venv_auto = false
+experimental = true
+
+[tools]
+rust = "{{ cookiecutter.rust_toolchain }}"
+"cargo:cargo-nextest" = "latest"
+"cargo:cargo-llvm-cov" = "latest"
+"cargo:typos-cli" = "latest"
+node = "lts"
+"npm:markdownlint-cli2" = "latest"
+
+[tasks.fmt]
+description = "Format all source files"
+run = [
+  "cargo fmt --all",
+]
+
+[tasks.lint]
+description = "Clippy (pedantic), typos, and markdown lint"
+run = [
+  "cargo clippy --all-targets --all-features -- -D warnings",
+  "typos",
+  "markdownlint-cli2 \"**/*.md\" \"#target\" \"#coverage\" \"#dist\"",
+]
+
+[tasks.lint-fix]
+description = "Auto-fix formatting, spelling, and markdown issues"
+run = [
+  "cargo fmt --all",
+  "typos -w",
+  "markdownlint-cli2 --fix \"**/*.md\" \"#target\" \"#coverage\" \"#dist\"",
+]
+
+[tasks.test]
+description = "Run the nextest test suite"
+run = [
+  "cargo nextest run --workspace --all-targets",
+]
+[tasks.check]
+description = "Aggregate format, lint, test, and doctest runs"
+depends = ["fmt", "lint", "test", "test-doc"]
+
+[tasks.test-doc]
+description = "Run Rust doctests"
+run = [
+  "cargo test --doc",
+]
+
+[tasks.coverage]
+description = "Generate HTML and lcov coverage reports"
+run = [
+  "cargo llvm-cov nextest --workspace --all-targets --lcov --output-path coverage/lcov.info --html --output-dir coverage/html",
+]
+
+[tasks.pkg-install]
+description = "Install the CLI locally via cargo"
+run = [
+  "cargo install --path . --force",
+]
+
+[tasks.dist-doc]
+description = "Explain how to configure cargo-dist"
+run = [
+  "cat docs/releasing.md",
+]

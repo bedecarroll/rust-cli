@@ -1,0 +1,8 @@
+target/
+debug/
+.DS_Store
+*.sw?
+*.log
+.env
+.env.*
+coverage/

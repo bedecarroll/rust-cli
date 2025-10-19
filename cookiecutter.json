@@ -1,0 +1,12 @@
+{
+  "project_name": "example rust cli",
+  "project_slug": "{{ cookiecutter.project_name | slugify }}",
+  "crate_name": "{{ cookiecutter.project_slug | replace('-', '_') }}",
+  "binary_name": "{{ cookiecutter.project_slug }}",
+  "description": "An opinionated Rust CLI application.",
+  "github_handle": "bedecarroll",
+  "author_name": "Bede Carroll",
+  "rust_toolchain": "1.85.1",
+  "rust_msrv": "1.85",
+  "license_year": "2025"
+}
