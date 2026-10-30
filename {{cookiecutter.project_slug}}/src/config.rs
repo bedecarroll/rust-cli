@@ -55,7 +55,7 @@ impl Config {
             let mut entries = fs::read_dir(&conf_d)
                 .with_context(|| format!("failed to read {}", conf_d.display()))?
                 .filter_map(std::result::Result::ok)
-                .filter(|entry| entry.file_type().map(|ty| ty.is_file()).unwrap_or(false))
+                .filter(|entry| entry.file_type().is_ok_and(|ty| ty.is_file()))
                 .map(|entry| entry.path())
                 .filter(|path| is_toml_file(path))
                 .collect::<Vec<PathBuf>>();

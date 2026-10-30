@@ -18,7 +18,7 @@ pub fn run(cmd: SelfUpdateCommand) -> color_eyre::Result<()> {
         .current_version(env!("CARGO_PKG_VERSION"));
 
     if let Some(tag) = cmd.version {
-        builder.target_version_tag(&tag);
+        builder.release_tag(tag);
     }
 
     let status = builder
